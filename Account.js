@@ -7,6 +7,7 @@ class BankAccount{
         this.name = name;
         this.balance = balance;
         this.creditLimit = creditLimit;
+        this.dailyLimit = 5000;
     };
     makeDeposit(depositAmount) {
         if(depositAmount > 0) {
@@ -16,13 +17,13 @@ class BankAccount{
     };
     makeWithdrawal(withdrawalAmount) {
         const totalCreditLimit = this.balance + this.creditLimit;
-        const dayLimit = 5000;
+        const dayLimit = this.dailyLimit;
 
         if(withdrawalAmount > totalCreditLimit){
             console.log("Sorry, you can not overdraw your account, YOU need more money sucker");
         }
         else if(withdrawalAmount > dayLimit) {
-            console.log("Sorry, not allowed more than your day limit of €5000,-");
+            console.log(`Sorry, not allowed more than your day limit of €${this.dailyLimit},-`);
 
         } else {
             this.balance = this.balance - withdrawalAmount;

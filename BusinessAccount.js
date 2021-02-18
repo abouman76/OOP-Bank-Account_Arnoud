@@ -1,35 +1,40 @@
 // Export your class here as module.exports = MyClass
 // module.exports = 70; // opdracht 1 business
+const BankAccount = require("./Account");
 
-class Business {
+class Business extends BankAccount {
     constructor(name, balance, creditLimit, sepaPermission) {
-        this.name = name;
-        this.balance = balance;
-        this.creditLimit = creditLimit;
+        super(name, balance, creditLimit);
+        // this.name = name;
+        // this.balance = balance;
+        // this.creditLimit = creditLimit;
+        // bovenstaande uitge-comment omdat deze in BankAccount staan en nu aangeroepen worden via de super()
         this.sepaPermission = sepaPermission;
+        this.dailyLimit = 20000;
     };
-    makeDeposit(addAmount) {
-        if(addAmount > 0) {
-            this.balance = this.balance + addAmount;
-        };
-        // console.log("Added Amount", addAmount, this.balance + addAmount);
-    };
-    makeWithdrawal(withdrawal) {
-        const businessCreditLimit = this.balance + this.creditLimit;
-        const dailyLimit = 20000;
-        if(withdrawal > businessCreditLimit) {
-            console.log("Sorry you can not withdraw more than you limit.")
-        }
-        else if(withdrawal > dailyLimit) {
-            console.log("Sorry, you can not withdraw more than €20000,-");
+    // makeDeposit(addAmount) {
+    //     if(addAmount > 0) {
+    //         this.balance = this.balance + addAmount;
+    //     };
+    //     // console.log("Added Amount", addAmount, this.balance + addAmount);
+    // };
 
-        } else {
-            this.balance = this.balance - withdrawal;
-            console.log("Yes you can withdraw from your account")
-        }
-         // console.log("LIMIT", businessCreditLimit, withdrawalAmount);
-        // console.log("Number Withdrawal", withdrawal, this.balance - withdrawal);
-    };
+    // makeWithdrawal(withdrawal) {
+    //     const businessCreditLimit = this.balance + this.creditLimit;
+    //     const dailyLimit = 20000;
+    //     if(withdrawal > businessCreditLimit) {
+    //         console.log("Sorry you can not withdraw more than you limit.")
+    //     }
+    //     else if(withdrawal > dailyLimit) {
+    //         console.log("Sorry, you can not withdraw more than €20000,-");
+    //
+    //     } else {
+    //         this.balance = this.balance - withdrawal;
+    //         console.log("Yes you can withdraw from your account")
+    //     }
+    // console.log("LIMIT", businessCreditLimit, withdrawalAmount);
+    // console.log("Number Withdrawal", withdrawal, this.balance - withdrawal);
+    //};
     sepaInvoice(invoice) {
         const invoiceMinusCost = invoice * 0.99;
 
@@ -48,7 +53,5 @@ class Business {
 
         // console.log("Invoice", invoice, invoiceMinusCost, this.balance + invoiceMinusCost);
     };
-
 }
-
 module.exports = Business;
